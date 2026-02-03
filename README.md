@@ -70,10 +70,10 @@ jupyter notebook cuaderno1.ipynb
 
 ### evidence
 
-- ![](images/1.png) 
-- ![](images/2.png) 
-- ![](images/3.png) 
-- ![](images/4.png)
+- ![text](images/1.png) 
+- ![text](images/2.png) 
+- ![text](images/3.png) 
+- ![text](images/4.png)
 
 ### Conclusions
 1. Training logistic regression from scratch provides a clear baseline and interpretable coefficients; performance metrics are computed and shown in the notebook.
