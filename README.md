@@ -68,40 +68,12 @@ jupyter notebook cuaderno1.ipynb
 - After running, the notebook prints metrics (accuracy, precision, recall, F1) per lambda and generates the plots (plot titles are in Spanish).
 - `best_model.npz` contains all parameters needed for inference (weights, bias, and normalization parameters).
 
-### Deploying on Amazon SageMaker (brief)
-1. Upload `best_model.npz` to an S3 bucket.
-2. Create an inference script (`inference.py`) that:
-   - Loads `best_model.npz` (w, b, mu, sigma, features)
-   - Normalizes incoming data using `mu` and `sigma`
-   - Computes probability with the sigmoid function and returns JSON {"prob": value}
-3. Package the script in a container or use SageMaker Script Mode to create an endpoint.
-4. Test the endpoint with a JSON payload containing the same features the model expects.
+### evidence
 
-Example inference payload:
-
-```json
-{
-  "Age": 60,
-  "Cholesterol": 300,
-  "RestingBP": 140,
-  "MaxHR": 150,
-  "Oldpeak": 1.0,
-  "CA": 0
-}
-```
-
-Expected response format:
-
-```json
-{"prob": 0.68}
-```
-
-(Note: the numeric value above is illustrative; run the notebook to obtain the actual probability from the saved model.)
-
-### Best practices and suggested files
-- Add a `requirements.txt` with pinned versions before publishing.
-- Include screenshots of training and endpoint tests when publishing the repo.
-- Optional: add `inference.py` and `serve.sh` for local serving with Flask or FastAPI.
+- ![](images/1.png) 
+- ![](images/2.png) 
+- ![](images/3.png) 
+- ![](images/4.png)
 
 ### Conclusions
 1. Training logistic regression from scratch provides a clear baseline and interpretable coefficients; performance metrics are computed and shown in the notebook.
@@ -109,7 +81,3 @@ Expected response format:
 3. Some feature pairs (such as Age vs. Cholesterol) exhibit better class separability; feature engineering or non-linear models could further improve results.
 4. Saving model parameters (`best_model.npz`) simplifies deployment workflows (SageMaker or lightweight REST services) for real-time risk scoring.
 
----
-If you want, I can:
-- Run the notebook here to generate `best_model.npz` and attach the metrics.
-- Add a `requirements.txt` and provide an example `inference.py` for SageMaker deployment.
