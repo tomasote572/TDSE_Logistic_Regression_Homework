@@ -83,4 +83,4 @@ pip install pandas numpy matplotlib
 4. Saving model parameters (`best_model.npz`) simplifies deployment workflows (SageMaker or lightweight REST services) for real-time risk scoring.
  
 
-
+### Note: Since deployment to AWS failed, I packaged it in Docker and created the endpoints so that it can be tested dynamically upon deployment.
