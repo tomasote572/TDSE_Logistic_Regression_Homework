@@ -48,25 +48,31 @@ Quick install:
 pip install pandas numpy matplotlib
 ```
 
-### How to run
-1. Place `Heart_Disease_Prediction.csv` in the repository root.
-2. Open `cuaderno1.ipynb` in Jupyter or VS Code and run cells top-to-bottom.
-3. The notebook will:
-   - Perform EDA and basic cleaning (counts, distributions).
-   - Select features and apply Z-score normalization.
-   - Implement and train logistic regression using gradient descent.
-   - Visualize decision boundaries for selected feature pairs.
-   - Sweep L2 regularization (lambda) and save the best model to `best_model.npz`.
 
-Optional command to open the notebook:
+### Despliegue y uso rápido
 
+- Probar (un registro):
 ```powershell
-jupyter notebook cuaderno1.ipynb
+   {
+   "features": {
+   "Age": 80,
+   "Cholesterol": 400,
+   "RestingBP": 180,
+   "MaxHR": 90,
+   "Oldpeak": 4.0,
+   "CA": 3
+   }
+   }
+   -----------------------
+      {
+   "instances": [
+      {"Age":63,"Cholesterol":233,"RestingBP":145,"MaxHR":150,"Oldpeak":2.3,"CA":0},
+      {"Age":37,"Cholesterol":250,"RestingBP":130,"MaxHR":170,"Oldpeak":1.4,"CA":1}
+   ]
+   }
 ```
+- Swagger UI: http://localhost:8000/docs  (probar `POST /predict` y `POST /predict_batch`)
 
-### Reproducible results
-- After running, the notebook prints metrics (accuracy, precision, recall, F1) per lambda and generates the plots (plot titles are in Spanish).
-- `best_model.npz` contains all parameters needed for inference (weights, bias, and normalization parameters).
 
 ### evidence
 
@@ -74,10 +80,30 @@ jupyter notebook cuaderno1.ipynb
 - ![text](images/2.png) 
 - ![text](images/3.png) 
 - ![text](images/4.png)
+- ![alt text](images/5.png) 
+- ![alt text](images/6.png) 
+- ![alt text](images/7.png)
+
+### Recent results (examples)
+
+- Single example sent to `/predict`:
+   - Input: `{"features": {"Age": 80, "Cholesterol": 400, "RestingBP": 180, "MaxHR": 90, "Oldpeak": 4.0, "CA": 3}}`
+   - Result: `{"probability": 0.99..., "prediction": 1}` — the model estimates a high risk (positive prediction) for this extreme case.
+
+- Example sent to `/predict_batch` (two instances with moderate values):
+   - Input: two records with Age 63 and 37 (cholesterol, blood pressure, etc.).
+   - Result: probabilities ≈ 0.47 and 0.47 → `prediction: 0` (absence under the 0.5 threshold).
+
+**Short interpretation**
+- The default decision threshold is 0.5; values above classify as `1` (presence) and below as `0` (absence).
+- A probability close to 0.5 indicates uncertainty; clinical decisions should not be based solely on this output.
+- Before production: evaluate performance on a held-out test set (accuracy, precision, recall, F1, AUC), check calibration, and log predictions to monitor data drift.
 
 ### Conclusions
 1. Training logistic regression from scratch provides a clear baseline and interpretable coefficients; performance metrics are computed and shown in the notebook.
 2. L2 regularization reduces weight magnitude and can improve generalization; tuning lambda demonstrated a trade-off between bias and variance.
 3. Some feature pairs (such as Age vs. Cholesterol) exhibit better class separability; feature engineering or non-linear models could further improve results.
 4. Saving model parameters (`best_model.npz`) simplifies deployment workflows (SageMaker or lightweight REST services) for real-time risk scoring.
+ 
+
 
