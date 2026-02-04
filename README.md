@@ -1,26 +1,3 @@
-## Heart Disease Risk Prediction using Logistic Regression
-Tomas Felipe Ramirez Alvarez
-## Heart Disease Risk Prediction — Regresión Logística
-Autor: Tomas Felipe Ramirez Alvarez
-
-### Resumen
-Este proyecto implementa una regresión logística desde cero (NumPy) para predecir la presencia de enfermedad cardíaca. El análisis incluye carga y EDA del dataset, selección y normalización de features, implementación de funciones teóricas (sigmoid, coste, gradiente, GD), entrenamiento, evaluación, visualización de fronteras de decisión, barrido de regularización L2 y una guía para desplegar el modelo en Amazon SageMaker.
-
-### Dataset
-- Fuente: Kaggle — neurocipher/heartdisease (https://www.kaggle.com/datasets/neurocipher/heartdisease)
-- Archivo en este repositorio: Heart_Disease_Prediction.csv
-- Muestras: 303
-- Target: `Heart Disease` (valores: `Presence`, `Absence`) — el notebook lo convierte a 1/0.
-
-### Estructura y entregables
-- `cuaderno1.ipynb`: Notebook con todo el flujo de trabajo (EDA, entrenamiento, visualizaciones, regularización y guardado de modelo).
-- `Heart_Disease_Prediction.csv`: Dataset (debe estar presente localmente).
-- `best_model.npz`: Archivo generado tras ejecutar el barrido de lambdas (contiene `w`, `b`, `mu`, `sigma`, `features`).
-
-### Requisitos
-- Python 3.8+
-- Paquetes: pandas, numpy, matplotlib
-
 ## Heart Disease Risk Prediction — Logistic Regression
 Author: Tomas Felipe Ramirez Alvarez
 
